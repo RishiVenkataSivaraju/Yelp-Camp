@@ -1,0 +1,44 @@
+<!-- <% layout("layouts/boilerplate") %>
+    <h1>All The Campgrounds</h1>
+    <a href="/campgrounds/new">Add Campgrounds</a>
+    <ul>
+        <% for (let campgrounds of campground ){ %>
+            <li><a href="/campgrounds/<%= campgrounds._id %>"><%= campgrounds.title %></a></li>
+            <% } %>
+    </ul> -->
+    <% layout('layouts/boilerplate')%>
+    <%= msg %>
+<div id="cluster-map" ></div>
+    <h1>All Campgrounds</h1>
+    <div>
+        <a href="/campgrounds/new">Add Campground</a>
+    </div>
+    <% for (let campgrounds of campground){%>
+    <div class="card mb-3" >
+        <div class="row">
+            <div class="col-md-4">
+ <%if(campgrounds.images.length) {%>
+                <img class="img-fluid" alt="" src="<%=campgrounds.images[0].url%>">
+<% }else {%>
+            <img class="img-fluid" alt=""
+                src="https://res.cloudinary.com/douqbebwk/image/upload/v1600103881/YelpCamp/lz8jjv2gyynjil7lswf4.png">
+<% } %>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title"><%= campgrounds.title %> </h5>
+                    <p class="card-text"><%= campgrounds.description %></p>
+                    <p class="card-text">
+                        <small class="text-muted"><%= campgrounds.location%></small>
+                    </p>
+                    <a class="btn btn-primary" href="/campgrounds/<%=campgrounds._id%>">View <%=campgrounds.title%></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% }%>
+<script>
+const campgrounds={  features:<%-JSON.stringify(campground)%>}
+</script>
+    
+<script src="clusterMap.js"></script>
